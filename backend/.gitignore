@@ -1,0 +1,11 @@
+# Ignore uploads
+uploads/
+
+# Ignore virtual environment
+venv/
+
+# Ignore environment variables
+.env
+
+# Ignore Python cache
+__pycache__/
