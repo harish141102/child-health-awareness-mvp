@@ -1,6 +1,16 @@
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+
+def allowed_file(filename):
+    return (
+        "." in filename and
+        filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+
+from services.ai_service import analyze_image
 
 app = Flask(__name__)
 CORS(app)
@@ -27,13 +37,14 @@ def upload_image():
     save_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
     image.save(save_path)
 
-    # Dummy AI response
-    return jsonify({
-        "status": "success",
-        "message": "Image received",
-        "risk_level": "Medium",
-        "note": "This is early awareness, not diagnosis"
-    })
+    try:
+        # 🔥 REAL AZURE AI CALL
+        result = analyze_image(save_path)
+        return jsonify(result)
+
+    except Exception as e:
+        return jsonify({"error": "AI processing failed"}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
