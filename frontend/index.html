@@ -1,143 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CareLens MVP</title>
-
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .card {
-    background: white;
-    padding: 30px;
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-
-  h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
-
-  button {
-    background: #0078d4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  button:hover {
-    background: #005fa3;
-  }
-
-  /* 🔄 Loading spinner */
-  .loader {
-    margin: 15px auto;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #0078d4;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    display: none;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* 🎨 Result colors */
-  .low {
-    color: #2ecc71; /* green */
-  }
-
-  .medium {
-    color: #f39c12; /* orange */
-  }
-
-  .high {
-    color: #e74c3c; /* red */
-  }
-
-  .disclaimer {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #555;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Democratizers | Child Health Awareness</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <div class="card">
-    <h2>CareLens</h2>
+  <div class="container center">
+    <h1 class="team">Democratizers</h1>
+    <h2 class="project">Child Health Early Awareness System</h2>
+    <p class="tagline">AI‑powered early awareness for healthier childhoods</p>
 
-    <input type="file" id="imageInput" />
-    <br />
-
-    <button onclick="uploadImage()">Upload Image</button>
-
-    <div class="loader" id="loader"></div>
-
-    <div id="result"></div>
-
-    <div class="disclaimer">
-      ⚠️ This tool provides early awareness only and is not a medical diagnosis.
-    </div>
+    <a href="upload.html" class="btn primary">Get Started</a>
   </div>
-
-  <script>
-  function uploadImage() {
-    const fileInput = document.getElementById("imageInput");
-    const resultDiv = document.getElementById("result");
-    const loader = document.getElementById("loader");
-
-    if (!fileInput.files.length) {
-      alert("Please select an image");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", fileInput.files[0]);
-
-    // Show loader
-    loader.style.display = "block";
-    resultDiv.innerText = "";
-    resultDiv.className = "";
-
-    fetch("http://127.0.0.1:5000/upload-image", {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(data => {
-        loader.style.display = "none";
-
-        const risk = data.risk_level.toLowerCase();
-        resultDiv.innerText = "Risk Level: " + data.risk_level;
-
-        if (risk === "low") resultDiv.className = "low";
-        else if (risk === "medium") resultDiv.className = "medium";
-        else if (risk === "high") resultDiv.className = "high";
-      })
-      .catch(() => {
-        loader.style.display = "none";
-        resultDiv.innerText = "Server error";
-        resultDiv.className = "high";
-      });
-  }
-</script>
 </body>
 </html>

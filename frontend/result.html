@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Result</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<script>
+  const result = JSON.parse(localStorage.getItem("result"));
+
+  document.getElementById("riskLevel").innerText =
+    "Risk Level: " + result.risk_level;
+
+  document.getElementById("message").innerText =
+    "Tags detected: " + result.tags_detected;
+</script>
+
+<body>
+  <div class="container">
+    <h2>Analysis Result</h2>
+
+    <div class="result-box">
+      <h3 id="riskLevel">Risk Level: Medium</h3>
+      <p id="message">
+        This result indicates a moderate level of risk based on visual analysis.
+      </p>
+    </div>
+
+    <p class="disclaimer">
+      ⚠️ Disclaimer: This system provides early awareness only and does not replace
+      professional medical diagnosis.
+    </p>
+
+    <a href="upload.html" class="btn secondary">Analyze Another Image</a>
+  </div>
+</body>
+</html>

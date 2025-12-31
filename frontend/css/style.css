@@ -1,0 +1,91 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #F7FAFC;
+  color: #2D3748;
+}
+
+.container {
+  max-width: 600px;
+  margin: 80px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.center {
+  margin-top: 120px;
+}
+
+.team {
+  color: #27AE60;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.project {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #4A5568;
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  margin: 20px 0;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.primary {
+  background: #2F80ED;
+  color: white;
+}
+
+.secondary {
+  background: #27AE60;
+  color: white;
+}
+
+.loader {
+  margin-top: 20px;
+  color: #2F80ED;
+}
+
+.hidden {
+  display: none;
+}
+
+.result-box {
+  background: #EDF2F7;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: #E53E3E;
+  margin-top: 20px;
+}

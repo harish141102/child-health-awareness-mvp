@@ -1,21 +1,32 @@
+from azure.ai.vision.imageanalysis import ImageAnalysisClient
+from azure.ai.vision.imageanalysis.models import VisualFeatures
+from azure.core.credentials import AzureKeyCredential
 import os
 
 def analyze_image(image_path):
-    """
-    Analyzes the uploaded image and returns a simple risk result.
-    This is MVP logic and can later be replaced with full Azure AI.
-    """
+    endpoint = os.getenv("AZURE_VISION_ENDPOINT")
+    key = os.getenv("AZURE_VISION_KEY")
 
-    if not os.path.exists(image_path):
-        raise ValueError("Image file not found")
+    client = ImageAnalysisClient(
+        endpoint=endpoint,
+        credential=AzureKeyCredential(key)
+    )
 
-    # 🔹 MVP logic (dummy but valid for demo)
-    # Later you can replace this with Azure AI Vision code
-    result = {
-        "message": "Image analyzed successfully",
-        "note": "This is early awareness, not diagnosis",
-        "risk_level": "Medium",
-        "status": "success"
+    with open(image_path, "rb") as img:
+        result = client.analyze(
+            image_data=img.read(),
+            visual_features=[VisualFeatures.TAGS]
+        )
+
+    tags = result.tags  # ✅ FIXED HERE
+
+    risk = "Low"
+    if len(tags) > 5:
+        risk = "Medium"
+    if len(tags) > 10:
+        risk = "High"
+
+    return {
+        "risk_level": risk,
+        "tags_detected": len(tags)
     }
-
-    return result
